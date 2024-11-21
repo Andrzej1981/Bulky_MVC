@@ -57,7 +57,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
         {
             if (id == null || id == 0) return NotFound();
 
-            var category = _unitOfWork.Category.Get(c => c.Id == id);
+            var category = _unitOfWork.Category.Get(a => a.Id == id);
             if (category == null) return NotFound();
             return View(category);
         }
@@ -74,6 +74,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
                 return RedirectToAction("Index", "Category");
             };
 
+            TempData["error"] = "Category update error";
             return View(obj);
 
         }

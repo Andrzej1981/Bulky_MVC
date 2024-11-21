@@ -1,19 +1,14 @@
 ﻿using Bulky.DataAccess.Repository.IRepository;
 using BulkyWeb.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace Bulky.DataAccess.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {
         private readonly ApplicationDbContext _db;
-        internal DbSet<T> dbSet;
+        private readonly DbSet<T> dbSet;
 
         public Repository(ApplicationDbContext db)
         {
@@ -25,10 +20,10 @@ namespace Bulky.DataAccess.Repository
             _db.Add(entity);
         }
 
-        public T Get(System.Linq.Expressions.Expression<Func<T, bool>> filter)
+        public T Get(Expression<Func<T, bool>> filter)
         {
             IQueryable<T> query = dbSet;
-            query.Where(filter);
+            query = query.Where(filter);
             return query.FirstOrDefault();
         }
 
