@@ -1,10 +1,11 @@
 ﻿using Bulky.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace BulkyWeb.DataAccess.Data
 {
-    public class ApplicationDbContext:IdentityDbContext
+    public class ApplicationDbContext:IdentityDbContext<IdentityUser>
     {
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options):base(options)
@@ -14,6 +15,8 @@ namespace BulkyWeb.DataAccess.Data
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<Company> Companies { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -24,6 +27,12 @@ namespace BulkyWeb.DataAccess.Data
                 new Category { Id = 2, Name = "SciFi", DisplayOrder = 2 },
                 new Category { Id = 3, Name = "History", DisplayOrder = 3 }
                 );
+
+            modelBuilder.Entity<Company>().HasData(
+               new Company { Id = 1, Name = "Tech Solution", StreetAddress = "123 Tech St", City="Tech City", PostalCode="30-30", PhoneNumber="666 666 666",State ="IL" },
+               new Company { Id = 2, Name = "Magua Solution", StreetAddress = "Magua St", City = "Magua City", PostalCode = "30-31", PhoneNumber = "888 888 888", State = "TX" },
+               new Company { Id = 3, Name = "Vivid Solution", StreetAddress = "Vivid St", City = "View City", PostalCode = "33-30", PhoneNumber = "333 444 666", State = "IL" }
+               );
 
             modelBuilder.Entity<Product>().HasData(
                 new Product
