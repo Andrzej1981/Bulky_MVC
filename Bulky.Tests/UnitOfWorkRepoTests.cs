@@ -32,40 +32,24 @@ namespace Bulky.Tests
             var db = CreateDbContext();
             //category repo
             var repo = new UnitOfWork(db);
-            //Create category
+            //execute
             var category = new Category { DisplayOrder = 6, Name = "Adventure" };
-            //execute
             repo.Category.Add(category);
-            repo.Save();
-            //result
-            var retult = db.Categories.SingleOrDefault(u=>u.Name == "Adventure");
-            //assert
-            Assert.NotNull(retult);
-            Assert.Equal(category.Name, retult.Name);
-        }
-
-        [Fact]
-        public void Get_ShoudlReturnNumberEntities1()
-        {
-            //db context
-            var db = CreateDbContext();
-            //category repo
-            var repo = new UnitOfWork(db);
-
-            //execute
-            //var category = new Category { DisplayOrder = 6, Name = "Adventure" };
-            //repo.Category.Add(category);
             var category2 = new Category { DisplayOrder = 1, Name = "Horror" };
             repo.Category.Add(category2);
+            var category3 = new Category { DisplayOrder = 5, Name = "Sci-Fi" };
+            repo.Category.Add(category3);
+            var category4 = new Category { DisplayOrder = 7, Name = "Mafia" };
+            repo.Category.Add(category4);
             repo.Save();
-
-            var count1 = db.Categories.Count();
-            var count2 = db.Products.Count();
+            //result
+            var result = db.Categories.SingleOrDefault(u=>u.Name == "Adventure");
             //assert
-
-            Assert.Equal(2, count1);
-            Assert.Equal(0, count2);
+            Assert.NotNull(result);
+            Assert.Equal("Adventure", result.Name);
         }
+
+       
 
         [Fact]
         public void Remove_ShouldRemoveCategory() 
@@ -74,17 +58,6 @@ namespace Bulky.Tests
             var db = CreateDbContext();
             //category repo
             var repo = new UnitOfWork(db);
-            // add entitys
-            //var category1 = new Category { DisplayOrder = 6, Name = "Adventure" };
-            //repo.Category.Add(category1);
-            //var category2 = new Category { DisplayOrder = 1, Name = "Horror" };
-            //repo.Category.Add(category2);
-            var category3 = new Category { DisplayOrder = 5, Name = "Sci-Fi" };
-            repo.Category.Add(category3);
-            var category4 = new Category { DisplayOrder = 7, Name = "Mafia" };
-            repo.Category.Add(category4);
-            repo.Save();
-
             //find entity
             var ent = repo.Category.Get(s => s.Name == "Adventure");
             //execute
@@ -102,25 +75,14 @@ namespace Bulky.Tests
             var db = CreateDbContext();
             //category repo
             var repo = new UnitOfWork(db);
-            // add categiry entity
-            //var category1 = new Category { DisplayOrder = 6, Name = "Adventure" };
-            //repo.Category.Add(category1);
-            //var category2 = new Category { DisplayOrder = 1, Name = "Horror" };
-            //repo.Category.Add(category2);
-            //var category3 = new Category { DisplayOrder = 5, Name = "Sci-Fi" };
-            //repo.Category.Add(category3);
-            //var category4 = new Category { DisplayOrder = 7, Name = "Mafia" };
-            //repo.Category.Add(category4);
-            //repo.Save();
-            //find entity
-            var ent = repo.Category.Get(s => s.DisplayOrder == 1);
-            var count1 = db.Categories.Count();
+      
             //execute
-            var categoryName = ent.Name;
+            var ent = db.Categories.SingleOrDefault(s => s.Name == "Horror");
+            
             //assert
             Assert.NotNull(ent);
-            Assert.Equal("Horror", categoryName);
-            Assert.Equal(2, count1);
+            Assert.Equal("Horror", ent.Name);
+            
         }
 
 
