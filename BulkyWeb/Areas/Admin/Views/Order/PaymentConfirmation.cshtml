@@ -1,0 +1,19 @@
+﻿@model int
+
+<div class="container row pt-4">
+    <div class="col-12 text-center">
+        <h1 class="text-primary text-center">Płatność zakończona sukcesem!</h1>
+        Twój numer zamównienia to: @Model <br /><br />
+        <img src="~/images/lawn_leaf.jpg" width="65%" />
+    </div>
+
+    <div class="col-12 text-center" style="color:maroon">
+        <br />
+        Twoja płatność została zatwierdzona! - Twoje zamówienie bedzie wysłane w ciągu 24 godzin.
+        <a asp-area="Admin" asp-controller="Order" asp-action="Details" asp-route-Id="@Model" class="btn btn-primary">Powrót do szczegółów zamówienia</a>
+        <br />
+
+    </div>
+</div>
+
+
