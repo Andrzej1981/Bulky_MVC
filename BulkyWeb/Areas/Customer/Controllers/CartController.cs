@@ -126,11 +126,11 @@ namespace BulkyWeb.Areas.Customer.Controllers
             {
                 //Stripe płatność
                 var domain = "https://localhost:7276/";
-                var options = new Stripe.Checkout.SessionCreateOptions
+                var options = new SessionCreateOptions
                 {
                     SuccessUrl = domain+ $"customer/cart/OrderConfirmation?id={shoppingCartVM.OrderHeader.Id}",
                     CancelUrl = domain+"customer/cart/index",
-                    LineItems = new List<Stripe.Checkout.SessionLineItemOptions>(),
+                    LineItems = new List<SessionLineItemOptions>(),
                       Mode = "payment",
                     };
 
@@ -141,7 +141,7 @@ namespace BulkyWeb.Areas.Customer.Controllers
                         PriceData = new SessionLineItemPriceDataOptions()
                         {
                             UnitAmount = (long)(item.Price * 100),
-                            Currency="pl",
+                            Currency="pln",
                             ProductData = new SessionLineItemPriceDataProductDataOptions()
                             {
                                 Name = item.Product.Title
@@ -152,7 +152,7 @@ namespace BulkyWeb.Areas.Customer.Controllers
                     options.LineItems.Add(sessionLineItem);
                 }
 
-                var service = new Stripe.Checkout.SessionService();
+                var service = new SessionService();
                 Session session = service.Create(options);
                 _unitOfWork.OrderHeader.UpdateStripePaymentID(shoppingCartVM.OrderHeader.Id, session.Id, session.PaymentIntentId);
                 _unitOfWork.Save();
@@ -167,6 +167,26 @@ namespace BulkyWeb.Areas.Customer.Controllers
 
         public IActionResult OrderConfirmation(int id)
         {
+            OrderHeader orderHeader = _unitOfWork.OrderHeader.Get(u => u.Id == id, includeProperties: "ApplicationUser");
+            if(orderHeader.PaymentStatus != SD.PaymantStatusDelayedPayment)
+            {
+                //to jest jak zamawia osoba fizyczna
+                var service = new SessionService();
+                Session session = service.Get(orderHeader.SessionId);
+                if(session.PaymentStatus.ToLower() == "paid")
+                {
+                    _unitOfWork.OrderHeader.UpdateStripePaymentID(id, session.Id, session.PaymentIntentId);
+                    _unitOfWork.OrderHeader.UpdateStatus(id, SD.StatusApproved, SD.PaymantStatusApproved);
+                    _unitOfWork.Save();
+                };
+            }
+
+            List<ShoppingCart> shoppingCarts = _unitOfWork.ShoppingCart
+                .GetAll(u=>u.ApplicationUserId==orderHeader.ApplicationUserId).ToList();
+
+            _unitOfWork.ShoppingCart.RemoveRange(shoppingCarts);
+            _unitOfWork.Save();
+
             return View(id);
         }
 
