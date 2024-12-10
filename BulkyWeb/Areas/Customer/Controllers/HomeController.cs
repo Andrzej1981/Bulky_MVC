@@ -23,6 +23,7 @@ namespace BulkyWeb.Areas.Customer.Controllers
 
         public IActionResult Index()
         {
+            
             var productList = _unitOfWork.Product.GetAll(includeProperties: "Category");
             return View(productList);
         }
@@ -62,7 +63,7 @@ namespace BulkyWeb.Areas.Customer.Controllers
                 
             }
 
-            TempData["success"] = "Cart update successfully";
+            TempData["success"] = "Dodano to koszyka";
 
            
 

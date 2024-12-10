@@ -9,11 +9,11 @@ namespace Bulky.Models
         public int Id { get; set; }
         [Required]
         [MaxLength(30)]
-        [DisplayName("Category Name")]
+        [DisplayName("Nazwa kategorii")]
         public string Name { get; set; }
         [Required]
-        [Range(1, 100, ErrorMessage = "Display Order powinien wynosić między 1-100")]
-        [DisplayName("Display Order")]
+        [Range(1, 100, ErrorMessage = "Porządek wyświetlania powinien wynosić między 1-100")]
+        [DisplayName("Porządek wyświetlania")]
         public int DisplayOrder { get; set; }
     }
 }

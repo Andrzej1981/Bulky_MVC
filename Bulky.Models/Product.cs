@@ -23,28 +23,30 @@ namespace Bulky.Models
         public string ISBN { get; set; }
 
         [Required]
+        [Display(Name = "Opis")]
         public string Description { get; set; }
 
         [Required]
+        [Display(Name = "Autor")]
         public string Author { get; set; }
 
         [Required]
-        [Display(Name = "List Price")]
+        [Display(Name = "Cena regularna")]
         [Range(1, 1000000)]
         public double ListPrice { get; set; }
 
         [Required]
-        [Display(Name = "Price for 1-50")]
+        [Display(Name = "Cena dla ilości 1-50")]
         [Range(1,1000000)]
         public double Price { get; set; }
 
         [Required]
-        [Display(Name = "Price for 51-100")]
+        [Display(Name = "Cena dla ilości 51-100")]
         [Range(1, 1000000)]
         public double Price50 { get; set; }
 
         [Required]
-        [Display(Name = "Price for 100+")]
+        [Display(Name = "Cena dla ilości 100+")]
         [Range(1, 1000000)]
         public double Price100 { get; set; }
 

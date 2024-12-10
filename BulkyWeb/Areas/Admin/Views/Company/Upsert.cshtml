@@ -4,7 +4,7 @@
     <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="text-white py-2">@(Model.Id!=0 ? "Update":"Create") Product</h2>
+                <h2 class="text-white py-2">@(Model.Id!=0 ? "Update":"Create") Produkt</h2>
             </div>
         </div>
     </div>
@@ -51,16 +51,16 @@
                                 <div class="col-6 col-md-3">
                                     @if (Model.Id != 0)
                                     {
-                                        <button type="submit" class="btn btn-secondary form-control">Update</button>
+                                        <button type="submit" class="btn btn-secondary form-control">Uaktualnij</button>
                                     }
                                     else
                                     {
-                                        <button type="submit" class="btn btn-primary form-control">Create</button>
+                                        <button type="submit" class="btn btn-primary form-control">Utwórz</button>
                                     }
                                 </div>
 
                                 <div class="col-6 col-md-3">
-                                    <a asp-controller="Company" asp-action="Index" class="btn btn-outline-primary border form-control">Back to list</a>
+                                    <a asp-controller="Company" asp-action="Index" class="btn btn-outline-primary border form-control">Powrót do listy</a>
                                 </div>
                             </div>
 

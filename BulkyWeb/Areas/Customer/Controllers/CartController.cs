@@ -55,11 +55,50 @@ namespace BulkyWeb.Areas.Customer.Controllers
             shoppingCartVM.OrderHeader.ApplicationUser = _unitOfWork.ApplicationUser.Get(u => u.Id == userId);
 
             shoppingCartVM.OrderHeader.Name = shoppingCartVM.OrderHeader.ApplicationUser.Name;
-            shoppingCartVM.OrderHeader.PhoneNumber = shoppingCartVM.OrderHeader.ApplicationUser.PhoneNumber;
-            shoppingCartVM.OrderHeader.StreetAddress = shoppingCartVM.OrderHeader.ApplicationUser.StreetAddress;
-            shoppingCartVM.OrderHeader.City = shoppingCartVM.OrderHeader.ApplicationUser.City;
-            shoppingCartVM.OrderHeader.State = shoppingCartVM.OrderHeader.ApplicationUser.State;
-            shoppingCartVM.OrderHeader.PostalCode = shoppingCartVM.OrderHeader.ApplicationUser.PostalCode;
+            if (string.IsNullOrEmpty(shoppingCartVM.OrderHeader.ApplicationUser.PhoneNumber))
+            {
+                shoppingCartVM.OrderHeader.PhoneNumber = "";
+            } else
+            {
+                shoppingCartVM.OrderHeader.PhoneNumber = shoppingCartVM.OrderHeader.ApplicationUser.PhoneNumber;
+            }
+
+            if (string.IsNullOrEmpty(shoppingCartVM.OrderHeader.ApplicationUser.StreetAddress))
+            {
+                shoppingCartVM.OrderHeader.StreetAddress = "";
+            }
+            else
+            {
+                shoppingCartVM.OrderHeader.StreetAddress = shoppingCartVM.OrderHeader.ApplicationUser.StreetAddress;
+            }
+
+            if (string.IsNullOrEmpty(shoppingCartVM.OrderHeader.ApplicationUser.City))
+            {
+                shoppingCartVM.OrderHeader.City = "";
+            }
+            else
+            {
+                shoppingCartVM.OrderHeader.City = shoppingCartVM.OrderHeader.ApplicationUser.City;
+            }
+
+            if (string.IsNullOrEmpty(shoppingCartVM.OrderHeader.ApplicationUser.State))
+            {
+                shoppingCartVM.OrderHeader.ApplicationUser.State = "";
+            }
+            else
+            {
+                shoppingCartVM.OrderHeader.State = shoppingCartVM.OrderHeader.ApplicationUser.State;
+            }
+
+            if (string.IsNullOrEmpty(shoppingCartVM.OrderHeader.ApplicationUser.PostalCode))
+            {
+                shoppingCartVM.OrderHeader.ApplicationUser.PostalCode = "";
+            }
+            else
+            {
+                shoppingCartVM.OrderHeader.PostalCode = shoppingCartVM.OrderHeader.ApplicationUser.PostalCode;
+            }
+
 
             foreach (var cart in shoppingCartVM.ShoppingCartList)
             {
@@ -125,7 +164,7 @@ namespace BulkyWeb.Areas.Customer.Controllers
             if (applicationUser.CompanyId.GetValueOrDefault() == 0)
             {
                 //Stripe płatność
-                var domain = "https://localhost:7276/";
+                var domain = Request.Scheme + "://"+ Request.Host.Value + "/";
                 var options = new SessionCreateOptions
                 {
                     SuccessUrl = domain+ $"customer/cart/OrderConfirmation?id={shoppingCartVM.OrderHeader.Id}",
@@ -179,6 +218,8 @@ namespace BulkyWeb.Areas.Customer.Controllers
                     _unitOfWork.OrderHeader.UpdateStatus(id, SD.StatusApproved, SD.PaymantStatusApproved);
                     _unitOfWork.Save();
                 };
+
+                HttpContext.Session.Clear();
             }
 
             List<ShoppingCart> shoppingCarts = _unitOfWork.ShoppingCart
@@ -202,9 +243,10 @@ namespace BulkyWeb.Areas.Customer.Controllers
 
         public IActionResult Minus(int cartId)
         {
-            var cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.Id == cartId);
+            var cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.Id == cartId, tracked: true);
             if (cartFromDb.Count == 1)
             {
+                HttpContext.Session.SetInt32(SD.SessionCart, _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == cartFromDb.ApplicationUserId).Count() - 1);
                 _unitOfWork.ShoppingCart.Remove(cartFromDb);
             }
             else
@@ -221,7 +263,8 @@ namespace BulkyWeb.Areas.Customer.Controllers
 
         public IActionResult Remove(int cartId)
         {
-            var cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.Id == cartId);
+            var cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.Id == cartId,tracked:true);
+            HttpContext.Session.SetInt32(SD.SessionCart, _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == cartFromDb.ApplicationUserId).Count() - 1);
             _unitOfWork.ShoppingCart.Remove(cartFromDb);
             _unitOfWork.Save();
             return RedirectToAction(nameof(Index));
