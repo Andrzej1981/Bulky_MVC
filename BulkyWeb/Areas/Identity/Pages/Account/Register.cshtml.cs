@@ -26,6 +26,7 @@ using Microsoft.Extensions.Logging;
 
 namespace BulkyWeb.Areas.Identity.Pages.Account
 {
+   
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;

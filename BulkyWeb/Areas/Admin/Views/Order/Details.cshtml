@@ -222,7 +222,7 @@
                             </div>
                              @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Employee))
                              {
-                                <button type="submit" asp-action="UpdateOrderDetail" class="btn btn-warning form-control my-1">Update Order Details</button>
+                                <button type="submit" asp-action="UpdateOrderDetail" class="btn btn-warning form-control my-1">Zaktualizuj szczegóły zamówienia</button>
                              }
 
                         </div>
@@ -274,17 +274,17 @@
                             {
                                 @if (Model.OrderHeader.OrderStatus == SD.StatusApproved)
                                 {
-                                    <button type="submit" asp-action="StartProcessing" class="btn btn-primary form-control my-1">Start Processing</button>
+                                    <button type="submit" asp-action="StartProcessing" class="btn btn-primary form-control my-1">Rozpocznij przetwarzanie</button>
                                 }
                                 @if (Model.OrderHeader.OrderStatus == SD.StatusInProcess)
                                 {
-                                    <button type="submit" asp-action="ShipOrder" onclick="return ValidateInput()" class="btn btn-primary form-control my-1">Ship Order</button>
+                                    <button type="submit" asp-action="ShipOrder" onclick="return ValidateInput()" class="btn btn-primary form-control my-1">Wysyłka zamówienia</button>
                                 }
                                 @if (Model.OrderHeader.OrderStatus != SD.StatusRefunded &&
                                      Model.OrderHeader.OrderStatus != SD.StatusCancelled &&
                                      Model.OrderHeader.OrderStatus != SD.StatusShipped)
                                 {
-                                    <button asp-action="CancelOrder" type="submit" class="btn btn-danger form-control my-1" >Cancel Order</button>
+                                    <button asp-action="CancelOrder" type="submit" class="btn btn-danger form-control my-1">Anuluj zamówienie</button>
                                 }
                             }
                         </div>

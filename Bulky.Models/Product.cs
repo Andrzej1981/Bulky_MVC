@@ -15,44 +15,46 @@ namespace Bulky.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
-        [MaxLength(30)]
+        [Required(ErrorMessage = "Ta pozycja jest wymagana")]
+        [MaxLength(30,ErrorMessage ="Maksymalnie 30 znaków")]
+        [Display(Name = "Tytuł")]
         public string Title { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Ta pozycja jest wymagana")]
         public string ISBN { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Ta pozycja jest wymagana")]
         [Display(Name = "Opis")]
         public string Description { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Ta pozycja jest wymagana")]
         [Display(Name = "Autor")]
         public string Author { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Ta pozycja jest wymagana")]
         [Display(Name = "Cena regularna")]
-        [Range(1, 1000000)]
+        [Range(1, 1000000, ErrorMessage = "Cena jest wymagana")]
         public double ListPrice { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Ta pozycja jest wymagana")]
         [Display(Name = "Cena dla ilości 1-50")]
-        [Range(1,1000000)]
+        [Range(1, 1000000, ErrorMessage = "Cena jest wymagana")]
         public double Price { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Ta pozycja jest wymagana")]
         [Display(Name = "Cena dla ilości 51-100")]
-        [Range(1, 1000000)]
+        [Range(1, 1000000, ErrorMessage = "Cena jest wymagana")]
         public double Price50 { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Ta pozycja jest wymagana")]
         [Display(Name = "Cena dla ilości 100+")]
-        [Range(1, 1000000)]
+        [Range(1, 1000000, ErrorMessage = "Cena jest wymagana")]
         public double Price100 { get; set; }
 
         public int CategoryId { get; set; }
 
         [ForeignKey("CategoryId")]
+        [Display(Name = "Kategoria")]
         [ValidateNever]
         public Category Category { get; set; }
 

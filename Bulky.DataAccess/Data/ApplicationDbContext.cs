@@ -27,100 +27,53 @@ namespace BulkyWeb.DataAccess.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Category>().HasData(
-                new Category { Id= 1 , Name = "Action" , DisplayOrder = 1},
-                new Category { Id = 2, Name = "SciFi", DisplayOrder = 2 },
-                new Category { Id = 3, Name = "History", DisplayOrder = 3 }
+                new Category { Id= 1 , Name = "Akcja" , DisplayOrder = 1},
+                new Category { Id = 2, Name = "Sci-Fi", DisplayOrder = 2 },
+                new Category { Id = 3, Name = "Historia", DisplayOrder = 3 },
+                new Category { Id = 4, Name = "Przygoda", DisplayOrder = 4 }
                 );
 
             modelBuilder.Entity<Company>().HasData(
-               new Company { Id = 1, Name = "Tech Solution", StreetAddress = "123 Tech St", City="Tech City", PostalCode="30-30", PhoneNumber="666 666 666",State ="IL" },
-               new Company { Id = 2, Name = "Magua Solution", StreetAddress = "Magua St", City = "Magua City", PostalCode = "30-31", PhoneNumber = "888 888 888", State = "TX" },
-               new Company { Id = 3, Name = "Vivid Solution", StreetAddress = "Vivid St", City = "View City", PostalCode = "33-30", PhoneNumber = "333 444 666", State = "IL" }
+               new Company { Id = 1, Name = "Wydawnictwo Helion", StreetAddress = "ul. Kościuszki 1c", City= "Gliwice", PostalCode= "44-100", PhoneNumber= "032 230 98 63", State ="Śląskie" },
+               new Company { Id = 2, Name = "OSDW Azymut (KI PWN)", StreetAddress = "Smolice 1H, Hala DE – DOK nr 3", City = "Stryków", PostalCode = "95-010", PhoneNumber = "+48 42 680 44 88", State = "Łódźkie" },
+               new Company { Id = 3, Name = "Społeczny Instytut Wydawniczy ZNAK Sp. z o.o.", StreetAddress = "ul. Madalińskiego 9", City = "Kraków", PostalCode = "30-303", PhoneNumber = "(12) 324 97 75", State = "Małopolskie" }
                );
 
             modelBuilder.Entity<Product>().HasData(
                 new Product
                 {
                     Id = 1,
-                    Title = "Fortune of Time",
-                    Author = "Billy Spark",
-                    Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
+                    Title = "Paddington w Peru.",
+                    Author = "Anna Wilson",
+                    Description = @"Podróż do Peru to wielka sprawa dla małego niedźwiadka. Nawet dla Paddingtona, który mieszka przecież w wielkim mieście. 
+                                    I choć jest już całkiem duży (od niedawna ma nawet prawdziwy paszport), to jednak nadal trzyma pod kapeluszem kanapki z marmoladą.\r\n\r\n
+                                    Paddington dostaje list ze straszną wiadomością. Z ciocią Lucy dzieje się coś niedobrego! Pewnie staruszka tęskni za misiem… 
+                                    Rodzina Brownów postanawia natychmiast wyruszyć do Peru.\r\n\r\nKto mógłby przypuszczać, że czeka ich podróż życia, pełna niebezpieczeństw, dzikich zwierząt, starych map,
+                                    tajemniczych zagadek i niejasnych wskazówek. Bo na miejscu okazuje się, że ciocia Lucy… zniknęła w gąszczu amazońskiej dżungli.",
                     ISBN = "SWD9999001",
-                    ListPrice = 99,
-                    Price = 90,
-                    Price50 = 85,
-                    Price100 = 80,
+                    ListPrice = 58.48,
+                    Price = 55,
+                    Price50 = 49.5,
+                    Price100 = 45,
                     CategoryId = 1,
                     ImageUrl=""
                 },
                 new Product
                 {
                     Id = 2,
-                    Title = "Dark Skies",
-                    Author = "Nancy Hoover",
-                    Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
+                    Title = "Święta z dziadkiem",
+                    Author = "Michael Morpurgo",
+                    Description = @"Ciepła i pełna nadziei opowieść o potrzebie troski o naszą planetę – nie tylko dla siebie samych, ale również dla następnych pokoleń.
+                                    Co roku w święta Mia czyta z rodziną list od nieżyjącego już dziadka. W liście zawarł on wyjątkowe bożonarodzeniowe życzenia dla swojej wnuczki
+                                    – żeby dziewczynka mogła żyć w lepszym, czystszym świecie. Czule wspomina wspólne chwile, które spędził z nią w ogrodzie, gdy cieszyli się darami przyrody,
+                                    i smuci go, że niestety wszystko, co tak bardzo kochają, jest teraz w niebezpieczeństwie. Zadaniem Mii jest zrobić wszystko, aby dbać o Ziemię i ją chronić.
+",
                     ISBN = "CAW777777701",
-                    ListPrice = 40,
-                    Price = 30,
-                    Price50 = 25,
-                    Price100 = 20,
+                    ListPrice = 23.74,
+                    Price = 19.99,
+                    Price50 = 15.99,
+                    Price100 = 13.99,
                     CategoryId = 2,
-                    ImageUrl = ""
-                },
-                new Product
-                {
-                    Id = 3,
-                    Title = "Vanish in the Sunset",
-                    Author = "Julian Button",
-                    Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
-                    ISBN = "RITO5555501",
-                    ListPrice = 55,
-                    Price = 50,
-                    Price50 = 40,
-                    Price100 = 35,
-                    CategoryId = 1,
-                    ImageUrl = ""
-                },
-                new Product
-                {
-                    Id = 4,
-                    Title = "Cotton Candy",
-                    Author = "Abby Muscles",
-                    Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
-                    ISBN = "WS3333333301",
-                    ListPrice = 70,
-                    Price = 65,
-                    Price50 = 60,
-                    Price100 = 55,
-                    CategoryId = 2,
-                    ImageUrl = ""
-                },
-                new Product
-                {
-                    Id = 5,
-                    Title = "Rock in the Ocean",
-                    Author = "Ron Parker",
-                    Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
-                    ISBN = "SOTJ1111111101",
-                    ListPrice = 30,
-                    Price = 27,
-                    Price50 = 25,
-                    Price100 = 20,
-                    CategoryId = 3,
-                    ImageUrl = ""
-                },
-                new Product
-                {
-                    Id = 6,
-                    Title = "Leaves and Wonders",
-                    Author = "Laura Phantom",
-                    Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
-                    ISBN = "FOT000000001",
-                    ListPrice = 25,
-                    Price = 23,
-                    Price50 = 22,
-                    Price100 = 20,
-                    CategoryId = 3,
                     ImageUrl = ""
                 });
         }

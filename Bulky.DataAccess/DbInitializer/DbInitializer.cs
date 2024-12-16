@@ -1,6 +1,7 @@
 ﻿using Bulky.Models;
 using Bulky.Utility;
 using BulkyWeb.DataAccess.Data;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
@@ -17,6 +18,7 @@ namespace Bulky.DataAccess.DbInitializer
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ApplicationDbContext _db;
+        
 
         public DbInitializer(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, ApplicationDbContext applicationDbContext)
         {
@@ -25,7 +27,7 @@ namespace Bulky.DataAccess.DbInitializer
             _roleManager = roleManager;
         }
 
-        public void Initialize()
+        public void Initialize(string AdminName,string password)
         {
             try
             {
@@ -43,24 +45,25 @@ namespace Bulky.DataAccess.DbInitializer
             if (!_roleManager.RoleExistsAsync(SD.Role_Customer).GetAwaiter().GetResult())
             {
                 _roleManager.CreateAsync(new IdentityRole(SD.Role_Customer)).GetAwaiter().GetResult();
-                 _roleManager.CreateAsync(new IdentityRole(SD.Role_Employee)).GetAwaiter().GetResult();
-                 _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(SD.Role_Employee)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(SD.Role_Company)).GetAwaiter().GetResult();
+
                 _userManager.CreateAsync(new ApplicationUser
                 {
-                    UserName = "Admin",
-                    Email = "andrzejs21@interia.pl",
-                    Name = "AS",
+                    UserName = AdminName,
+                    Email = AdminName,
+                    Name = "Andrzej Siebie",
                     PhoneNumber = "1234567890",
-                    StreetAddress = "Test",
+                    StreetAddress = "Test Street",
                     State = "Podkarpackie",
                     PostalCode = "39-311",
-                    City = "Zdziarzec"
-                }, "Test@1234").GetAwaiter().GetResult();
+                    City = "Rzeszów"
+                }, password).GetAwaiter().GetResult();
 
-                ApplicationUser user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "andrzejs21@interia.pl");
+                ApplicationUser user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "Admin@bulky.com");
                 _userManager.AddToRoleAsync(user, SD.Role_Admin).GetAwaiter().GetResult();
 
-                _roleManager.CreateAsync(new IdentityRole(SD.Role_Company)).GetAwaiter().GetResult();
             }
 
             return;

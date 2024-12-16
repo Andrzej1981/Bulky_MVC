@@ -94,12 +94,12 @@ namespace BulkyWeb.Areas.Admin.Controllers
 
                 
                 _unitOfWork.Save();
-                TempData["success"] = "Product created successfully";
+                TempData["success"] = "Produkt utworzony!";
                 return RedirectToAction("Index", "Product");
             }
             else
             {
-                TempData["error"] = "Product can't by created. Error!";
+                TempData["error"] = "Produkt nie może zostać utworzony!";
                 productVM.CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
                 {
                     Text = u.Name,
@@ -112,28 +112,6 @@ namespace BulkyWeb.Areas.Admin.Controllers
 
         }
         
-        //public IActionResult Delete(int? id)
-        //{
-        //    if (id == null || id == 0) return NotFound();
-
-        //    Product? category = _unitOfWork.Product.Get(c => c.Id == id);
-        //    if (category == null) return NotFound();
-        //    return View(category);
-        //}
-
-        //[HttpPost, ActionName("Delete")]
-        //public IActionResult DeletePOST(int? id)
-        //{
-        //    Product? obj = _unitOfWork.Product.Get(c => c.Id == id);
-
-        //    if (obj == null) return NotFound();
-
-        //    _unitOfWork.Product.Remove(obj);
-        //    _unitOfWork.Save();
-        //    TempData["success"] = "Product deleted successfully";
-        //    return RedirectToAction("Index", "Product");
-
-        //}
 
         #region API CALLS
         [HttpGet]
@@ -149,7 +127,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
             var productToBeDeleted = _unitOfWork.Product.Get(u=>u.Id==id);
             if (productToBeDeleted == null)
             {
-                return Json(new { success=false,message="Error while deleting" });
+                return Json(new { success=false,message="Błąd podczas usuwania produktu!" });
             }
 
             var oldImagePath = Path.Combine(_webhostEnvironment.WebRootPath, productToBeDeleted.ImageUrl.TrimStart('\\'));
@@ -162,7 +140,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
             _unitOfWork.Product.Remove(productToBeDeleted);
             _unitOfWork.Save();
 
-            return Json(new { success = true, message = "Delete succesfull" });
+            return Json(new { success = true, message = "Usunięto" });
         }
         #endregion
     }

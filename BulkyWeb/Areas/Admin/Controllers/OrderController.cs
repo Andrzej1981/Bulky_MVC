@@ -66,7 +66,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
             _unitOfWork.OrderHeader.Update(orderHeaderFromDb);
             _unitOfWork.Save();
 
-            TempData["Success"] = "Order Details Updated Successfully";
+            TempData["Success"] = "Szczegóły zamówienia zostały pomyślnie zaktualizowane";
 
             return RedirectToAction(nameof(Details),new { id = orderHeaderFromDb.Id });
         }
@@ -78,7 +78,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
         {
             _unitOfWork.OrderHeader.UpdateStatus(OrderVM.OrderHeader.Id, SD.StatusInProcess);
             _unitOfWork.Save();
-            TempData["Success"] = "Order Details Updated Successfully";
+            TempData["Success"] = "Szczegóły zamówienia zostały pomyślnie zaktualizowane";
 
             return RedirectToAction(nameof(Details), new { id = OrderVM.OrderHeader.Id });
         }
@@ -101,7 +101,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
 
             _unitOfWork.OrderHeader.Update(orderHeader);
             _unitOfWork.Save();
-            TempData["Success"] = "Order Was Shipped Successfully";
+            TempData["Success"] = "Zamówienie zostało pomyślnie wysłane";
 
             return RedirectToAction(nameof(Details), new { id = OrderVM.OrderHeader.Id });
         }
@@ -131,7 +131,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
                 _unitOfWork.OrderHeader.UpdateStatus(orderHeader.Id, SD.StatusCancelled, SD.StatusCancelled);
             }
             _unitOfWork.Save();
-            TempData["Success"] = "Order Was Cancelled Successfully";
+            TempData["Success"] = "Zamówienie zostało anulowane pomyślnie";
 
             return RedirectToAction(nameof(Details), new { id = OrderVM.OrderHeader.Id });
 

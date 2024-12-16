@@ -4,7 +4,7 @@
     <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="text-white py-2">@(Model.Product.Id!=0 ? "Update":"Create") Produkt</h2>
+                <h2 class="text-white py-2">@(Model.Product.Id!=0 ? "Aktualizuj":"Utwórz") produkt</h2>
             </div>
         </div>
     </div>
@@ -59,15 +59,17 @@
 
                             <div class="form-floating py-2 col-12">
                                 <select asp-for="@Model.Product.CategoryId" asp-items="@Model.CategoryList" class="form-control border-0 shadow">
-                                    <option disabled selected>-- Select category --</option>
+                                    <option disabled selected>-- Wybierz kategorię --</option>
                                 </select>
-                                <label asp-for="Product.CategoryId" class="ms-2"></label>
+                                <label class="ms-2">Kategoria</label>
+                            
                             </div>
 
 
                             <div class="form-floating py-2 col-12">
                                 <input type="file" name="file" class="form-control border-0 shadow" />
                                 <label asp-for="Product.ImageUrl" class="ms-2"></label>
+
                             </div>
 
 
@@ -75,16 +77,16 @@
                                 <div class="col-6 col-md-3">
                                     @if (Model.Product.Id != 0)
                                     {
-                                        <button type="submit" class="btn btn-secondary form-control">Update</button>
+                                        <button type="submit" class="btn btn-secondary form-control">Aktualizuj</button>
                                     }
                                     else
                                     {
-                                        <button type="submit" class="btn btn-primary form-control">Create</button>
+                                        <button type="submit" class="btn btn-primary form-control">Utwórz</button>
                                     }
                                 </div>
 
                                 <div class="col-6 col-md-3">
-                                    <a asp-controller="Product" asp-action="Index" class="btn btn-outline-primary border form-control">Back to list</a>
+                                    <a asp-controller="Product" asp-action="Index" class="btn btn-outline-primary border form-control">Powrót do listy produktów</a>
                                 </div>
                             </div>
 
@@ -101,13 +103,12 @@
 </div>
 
 @section Scripts{
-    <script>
+    <partial name="_ValidationScriptsPartial" />
+        <script>
         tinymce.init({
             selector: '#mytextarea'
         });
     </script>
-    @{
-    <partian name="_ValidationScriptsPartial"/>
-    }
+    
 }
 

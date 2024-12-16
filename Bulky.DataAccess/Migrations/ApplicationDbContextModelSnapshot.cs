@@ -47,19 +47,25 @@ namespace Bulky.DataAccess.Migrations
                         {
                             Id = 1,
                             DisplayOrder = 1,
-                            Name = "Action"
+                            Name = "Akcja"
                         },
                         new
                         {
                             Id = 2,
                             DisplayOrder = 2,
-                            Name = "SciFi"
+                            Name = "Sci-Fi"
                         },
                         new
                         {
                             Id = 3,
                             DisplayOrder = 3,
-                            Name = "History"
+                            Name = "Historia"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DisplayOrder = 4,
+                            Name = "Przygoda"
                         });
                 });
 
@@ -98,32 +104,32 @@ namespace Bulky.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            City = "Tech City",
-                            Name = "Tech Solution",
-                            PhoneNumber = "666 666 666",
-                            PostalCode = "30-30",
-                            State = "IL",
-                            StreetAddress = "123 Tech St"
+                            City = "Gliwice",
+                            Name = "Wydawnictwo Helion",
+                            PhoneNumber = "032 230 98 63",
+                            PostalCode = "44-100",
+                            State = "Śląskie",
+                            StreetAddress = "ul. Kościuszki 1c"
                         },
                         new
                         {
                             Id = 2,
-                            City = "Magua City",
-                            Name = "Magua Solution",
-                            PhoneNumber = "888 888 888",
-                            PostalCode = "30-31",
-                            State = "TX",
-                            StreetAddress = "Magua St"
+                            City = "Stryków",
+                            Name = "OSDW Azymut (KI PWN)",
+                            PhoneNumber = "+48 42 680 44 88",
+                            PostalCode = "95-010",
+                            State = "Łódźkie",
+                            StreetAddress = "Smolice 1H, Hala DE – DOK nr 3"
                         },
                         new
                         {
                             Id = 3,
-                            City = "View City",
-                            Name = "Vivid Solution",
-                            PhoneNumber = "333 444 666",
-                            PostalCode = "33-30",
-                            State = "IL",
-                            StreetAddress = "Vivid St"
+                            City = "Kraków",
+                            Name = "Społeczny Instytut Wydawniczy ZNAK Sp. z o.o.",
+                            PhoneNumber = "(12) 324 97 75",
+                            PostalCode = "30-303",
+                            State = "Małopolskie",
+                            StreetAddress = "ul. Madalińskiego 9"
                         });
                 });
 
@@ -286,86 +292,30 @@ namespace Bulky.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            Author = "Billy Spark",
+                            Author = "Anna Wilson",
                             CategoryId = 1,
-                            Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
+                            Description = "Podróż do Peru to wielka sprawa dla małego niedźwiadka. Nawet dla Paddingtona, który mieszka przecież w wielkim mieście. \r\n                                    I choć jest już całkiem duży (od niedawna ma nawet prawdziwy paszport), to jednak nadal trzyma pod kapeluszem kanapki z marmoladą.\\r\\n\\r\\n\r\n                                    Paddington dostaje list ze straszną wiadomością. Z ciocią Lucy dzieje się coś niedobrego! Pewnie staruszka tęskni za misiem… \r\n                                    Rodzina Brownów postanawia natychmiast wyruszyć do Peru.\\r\\n\\r\\nKto mógłby przypuszczać, że czeka ich podróż życia, pełna niebezpieczeństw, dzikich zwierząt, starych map,\r\n                                    tajemniczych zagadek i niejasnych wskazówek. Bo na miejscu okazuje się, że ciocia Lucy… zniknęła w gąszczu amazońskiej dżungli.",
                             ISBN = "SWD9999001",
                             ImageUrl = "",
-                            ListPrice = 99.0,
-                            Price = 90.0,
-                            Price100 = 80.0,
-                            Price50 = 85.0,
-                            Title = "Fortune of Time"
+                            ListPrice = 58.479999999999997,
+                            Price = 55.0,
+                            Price100 = 45.0,
+                            Price50 = 49.5,
+                            Title = "Paddington w Peru."
                         },
                         new
                         {
                             Id = 2,
-                            Author = "Nancy Hoover",
+                            Author = "Michael Morpurgo",
                             CategoryId = 2,
-                            Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
+                            Description = "Ciepła i pełna nadziei opowieść o potrzebie troski o naszą planetę – nie tylko dla siebie samych, ale również dla następnych pokoleń.\r\n                                    Co roku w święta Mia czyta z rodziną list od nieżyjącego już dziadka. W liście zawarł on wyjątkowe bożonarodzeniowe życzenia dla swojej wnuczki\r\n                                    – żeby dziewczynka mogła żyć w lepszym, czystszym świecie. Czule wspomina wspólne chwile, które spędził z nią w ogrodzie, gdy cieszyli się darami przyrody,\r\n                                    i smuci go, że niestety wszystko, co tak bardzo kochają, jest teraz w niebezpieczeństwie. Zadaniem Mii jest zrobić wszystko, aby dbać o Ziemię i ją chronić.\r\n",
                             ISBN = "CAW777777701",
                             ImageUrl = "",
-                            ListPrice = 40.0,
-                            Price = 30.0,
-                            Price100 = 20.0,
-                            Price50 = 25.0,
-                            Title = "Dark Skies"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Author = "Julian Button",
-                            CategoryId = 1,
-                            Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
-                            ISBN = "RITO5555501",
-                            ImageUrl = "",
-                            ListPrice = 55.0,
-                            Price = 50.0,
-                            Price100 = 35.0,
-                            Price50 = 40.0,
-                            Title = "Vanish in the Sunset"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Author = "Abby Muscles",
-                            CategoryId = 2,
-                            Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
-                            ISBN = "WS3333333301",
-                            ImageUrl = "",
-                            ListPrice = 70.0,
-                            Price = 65.0,
-                            Price100 = 55.0,
-                            Price50 = 60.0,
-                            Title = "Cotton Candy"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Author = "Ron Parker",
-                            CategoryId = 3,
-                            Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
-                            ISBN = "SOTJ1111111101",
-                            ImageUrl = "",
-                            ListPrice = 30.0,
-                            Price = 27.0,
-                            Price100 = 20.0,
-                            Price50 = 25.0,
-                            Title = "Rock in the Ocean"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Author = "Laura Phantom",
-                            CategoryId = 3,
-                            Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
-                            ISBN = "FOT000000001",
-                            ImageUrl = "",
-                            ListPrice = 25.0,
-                            Price = 23.0,
-                            Price100 = 20.0,
-                            Price50 = 22.0,
-                            Title = "Leaves and Wonders"
+                            ListPrice = 23.739999999999998,
+                            Price = 19.989999999999998,
+                            Price100 = 13.99,
+                            Price50 = 15.99,
+                            Title = "Święta z dziadkiem"
                         });
                 });
 
