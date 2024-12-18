@@ -5,6 +5,8 @@
 <p>-Identity .NET Core</p>
 <p>-Stripe</p>
 
+<a href="https://technologymanager.pl">Deploy</a>
+
 
 
 
