@@ -59,8 +59,6 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKey").Get<string>();
-var passwordToInitialize = builder.Configuration.GetSection("SecretArea:KeyForAdm").Get<string>();
-var AdminName = builder.Configuration.GetSection("SecretArea:AdminName").Get<string>();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
@@ -78,6 +76,6 @@ void SeedDatabase()
     using(var scope = app.Services.CreateScope())
     {
         var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
-        dbInitializer.Initialize(AdminName, passwordToInitialize);
+        dbInitializer.Initialize();
     }
 }

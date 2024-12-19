@@ -1,18 +1,33 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.Extensions.Options;
+
 
 namespace Bulky.Utility
 {
     public class EmailSender : IEmailSender
     {
-        public Task SendEmailAsync(string email, string subject, string htmlMessage)
+        private Email _email;
+        private readonly SecretArea _config;
+
+        public EmailSender(IOptions<SecretArea> config)
         {
-            return Task.CompletedTask;
+            _config = config.Value;
+        }
+
+        public async Task SendEmailAsync(string email, string subject, string htmlMessage)
+        {
+            var _email = new Email(new EmailParams
+            {
+                HostSmtp = _config.HostSmtp,
+                Port = 587,
+                EnableSsl = true,
+                SenderName = subject,
+                SenderEmail = _config.Email,
+                SenderEmailPassword = _config.KeyForAdm,
+            });
+
+            await _email.Send(subject, htmlMessage , email);
+
         }
     }
 }

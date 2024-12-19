@@ -22,9 +22,6 @@ namespace Bulky.Tests
 
         private ApplicationDbContext CreateDbContext()=> new ApplicationDbContext(_options);
 
-
-
-
         [Fact]
         public void Add_ShouldAddCategory()
         {

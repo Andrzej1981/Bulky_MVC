@@ -3,9 +3,11 @@ using Bulky.Models;
 using Bulky.Models.ViewModels;
 using Bulky.Utility;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Stripe.Checkout;
 using System.Security.Claims;
+using System.Text.Encodings.Web;
 
 namespace BulkyWeb.Areas.Customer.Controllers
 {
@@ -15,6 +17,8 @@ namespace BulkyWeb.Areas.Customer.Controllers
     {
 
         private readonly IUnitOfWork _unitOfWork;
+        
+
         [BindProperty]
         public ShoppingCartVM shoppingCartVM { get; set; }
         public CartController(IUnitOfWork unitOfWork)
@@ -200,12 +204,13 @@ namespace BulkyWeb.Areas.Customer.Controllers
             }
 
 
-            return View(shoppingCartVM);
-
+            //return View(shoppingCartVM);
+            return RedirectToAction(nameof(OrderConfirmation), new {id= shoppingCartVM.OrderHeader.Id});
         }
 
-        public IActionResult OrderConfirmation(int id)
+        public async Task<IActionResult> OrderConfirmation(int id)
         {
+
             OrderHeader orderHeader = _unitOfWork.OrderHeader.Get(u => u.Id == id, includeProperties: "ApplicationUser");
             if(orderHeader.PaymentStatus != SD.PaymantStatusDelayedPayment)
             {
@@ -226,6 +231,8 @@ namespace BulkyWeb.Areas.Customer.Controllers
                 .GetAll(u=>u.ApplicationUserId==orderHeader.ApplicationUserId).ToList();
 
             _unitOfWork.ShoppingCart.RemoveRange(shoppingCarts);
+
+            
             _unitOfWork.Save();
 
             return View(id);
